@@ -1,21 +1,27 @@
-import {Grid,Segment} from 'semantic-ui-react'
-import Trend from '../components/Trend'
-import FibRetracement from '../components/FibRetracement'
-import Volatilty from '../components/Volatility'
-import Clouse from '../components/Closure'
-import Rsp from '../components/Rsp'
+import {Divider, Grid,GridColumn,Segment} from 'semantic-ui-react'
+import Trend from '../components/trading_checklist/Trend'
+import FibRetracement from '../components/trading_checklist/FibRetracement'
+import Volatilty from '../components/trading_checklist/Volatility'
+import Closure from '../components/trading_checklist/Closure'
+import Correlation from '../components/trading_checklist/Correlation'
+import Rsp from '../components/trading_checklist/Rsp'
+import Volume from '../components/trading_checklist/Volume'
+import SaveTrade from '../components/trading_checklist/SaveTrade'
+
 import { useState } from 'react'
-import Closure from '../components/Closure'
+
 
 
  const Home = () => {
 
-
+  
   interface Trend {fourhourly: string;oneday: string;}
   interface FibRetracement {retracement: number}
   interface RSP{value: boolean}
   interface Volatility{minfifteen:boolean;hourone:boolean;hourfour:boolean;}
-  interface Closure{close: "type_1" |"type_2"| "typ3"}
+  interface Closure{close: string}
+  interface Correlation{value: boolean}
+  interface Volume {level:number}
 
 
   const [trend,setTrend] = useState<Trend> ({
@@ -25,7 +31,9 @@ import Closure from '../components/Closure'
   const [retracement,setRetracement] = useState<FibRetracement> ({"retracement": 0})
   const [rsp,setRSP] = useState<RSP>({"value":false})
   const [volatility,setVolatility] = useState<Volatility>({"minfifteen":false,"hourone":false,"hourfour":false})
-  const [closure,setClosure] = useState<Closure>({"close":"type_1"})
+  const [closure,setClosure] = useState<Closure>({"close":""})
+  const [correlation,setCorrelation] = useState<Correlation>({"value":false})
+  const [volume,setVolume] = useState<Volume>({level: 0 })
 
   //Function Handlers
   const set4HTrendHandler = (item: string) => {
@@ -39,7 +47,6 @@ import Closure from '../components/Closure'
   }
   const setRSPHandler = (value: boolean) =>{
     setRSP({"value":value})
-
   }
   const set15MVolatilityHandler = (value: boolean) => {
     setVolatility({...volatility,"minfifteen":value})
@@ -50,11 +57,19 @@ import Closure from '../components/Closure'
   const set4HMVolatilityHandler = (value: boolean) => {
     setVolatility({...volatility,"hourfour":value})
   }
-
+  const setClosureHandler = (closure: string) =>{
+    setClosure({"close":closure})
+  }
+  const setCorrelationHandler = (value: boolean) =>{
+    setCorrelation({"value":value})
+  }
+  const setVolumeHandler = (volume: number) =>{
+    setVolume({"level":volume})
+  }
   
 
   return (
-    <div>
+  <div>
       <h1 className="ui center aligned header">Trading Checklist</h1>
     
       <div className = "ui container grid">
@@ -75,25 +90,39 @@ import Closure from '../components/Closure'
           </Grid.Column>
           <Grid.Column>
             <Segment>
-                <Volatilty volatility = {volatility} volatility15MMSetter = {set15MVolatilityHandler} volatility1HSetter = {set1HVolatilityHandler} volatility4HSetter = {set4HMVolatilityHandler}/>
+               <Grid columns={2} stackable textAlign='center'>
+                 <Divider vertical> -></Divider>
+                 <Grid.Row>
+                   <Grid.Column>
+                    <Volatilty volatility = {volatility} volatility15MMSetter = {set15MVolatilityHandler} volatility1HSetter = {set1HVolatilityHandler} volatility4HSetter = {set4HMVolatilityHandler}/>
+                   </Grid.Column>
+                   <Grid.Column>
+                   </Grid.Column>
+                 </Grid.Row>
+               </Grid>
+                
             </Segment>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row stretched>
           <Grid.Column>
             <Segment>
-              <Closure/>
+              <Closure close = {closure} setClosureHandler = {setClosureHandler}/>
             </Segment>
           </Grid.Column>
           <Grid.Column>
             <Segment>
+                <Correlation cor = {correlation} setCor = {setCorrelationHandler}/>
             </Segment>
           </Grid.Column>
           <Grid.Column>
             <Segment>
+                <Volume volume = {volume} setVolume = {setVolumeHandler}/>
             </Segment>
           </Grid.Column>
         </Grid.Row>
+
+        <SaveTrade/>
       </Grid>
     </div>
   </div>

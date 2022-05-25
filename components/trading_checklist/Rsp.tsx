@@ -17,7 +17,7 @@ const Rsp = ({rsp,setRsp}: IProps) => {
 return (
     
     <>
-    <h3 className="ui blue header">Recent Swing Point</h3>
+    <h2 className="ui blue header">Recent Swing Point</h2>
     <Checkbox toggle checked = {rsp.value} onChange={(e)=>checkBoxHandler(e)}/>
     </>
 )
