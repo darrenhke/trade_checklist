@@ -30,8 +30,8 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
             }
                 
                 const trade = await db.collection('checklist').insertOne(tradeObj)
-                res.status(201).json({trade});
-                console.log(trade);
+                return res.status(201).json({trade});
+                // console.log(trade);
                 
             }catch(err){
                 res.status(500).json(err);
@@ -42,6 +42,7 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
                 let { db } = await connectToDatabase();
                 const trades = await db.collection("checklist").find().toArray();
                 res.status(200).json({ trades });
+                return;
             }catch(err){
                 res.status(500).json(err);
             }  

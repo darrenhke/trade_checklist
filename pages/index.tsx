@@ -96,7 +96,8 @@ import { useState } from 'react'
     }
     const response = await fetch(endpoint, options)
     const result = await response.json()
-    alert(`Is this your data ${result}`)
+    const currentTime = new Date().toLocaleString();
+    alert(`Trade has been submitted at ${currentTime}  `)
 
   }
 
