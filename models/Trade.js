@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 const TradeSchema = new mongoose.Schema(
   {
     trend:{

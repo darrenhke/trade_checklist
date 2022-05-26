@@ -16,11 +16,13 @@ interface IProps {
     const trend1dvalues: Array<string> = ["Down","Range","Up"]
 
     const button4HClickHandler = (e: React.MouseEvent<HTMLButtonElement>) =>{
+        e.preventDefault()
         console.log(e.currentTarget.value)
         return trend.fourhourly === e.currentTarget.value ?  trend4HSetter(""): trend4HSetter(e.currentTarget.value)
     }
 
     const button1DClickHandler = (e: React.MouseEvent<HTMLButtonElement>) =>{
+        e.preventDefault()
         console.log(e.currentTarget.value)
         return trend.oneday === e.currentTarget.value ?  trend1DSetter(""): trend1DSetter(e.currentTarget.value)
     }

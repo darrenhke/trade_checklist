@@ -10,6 +10,8 @@ interface IProps {
 
     const checkBoxHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.target.checked ===true ? setCor(e.target.checked = false):setCor(e.target.checked = true)
+        console.log(e.target.checked);
+        
     }
 
     return(

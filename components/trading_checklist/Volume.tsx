@@ -13,8 +13,9 @@ const Volume = ({volume,setVolume}: IProps) => {
 
 
     const volButtonHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
         const newValue = parseInt(e.currentTarget.value)
-        console.log(newValue);
+        console.log(`Volume : ${newValue}`);
         
         return volume.level === newValue ?  setVolume(0): setVolume(newValue)
 

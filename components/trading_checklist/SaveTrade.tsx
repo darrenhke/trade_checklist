@@ -5,6 +5,7 @@ import {Grid} from 'semantic-ui-react'
 
 const SaveTrade = () => {
 
+
   return (
         <>
         <Grid.Row>
@@ -14,7 +15,7 @@ const SaveTrade = () => {
             <Button.Group>
               <Button>Cancel</Button>
               <Button.Or />
-              <Button positive>Save</Button>
+              <Button positive type="submit">Save</Button>
           </Button.Group></Grid.Column>
         </Grid.Row>
     </>

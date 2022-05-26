@@ -12,18 +12,18 @@ interface IProps {
 const Volatilty = ({volatility,volatility15MMSetter,volatility1HSetter,volatility4HSetter}: IProps) => {
 
     const checkBoxHandler15MM = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.checked)
         e.target.checked ===true ? volatility15MMSetter(e.target.checked = false):volatility15MMSetter(e.target.checked = true)
+        console.log(`15 Min : ${e.target.checked}`)
     }
 
     const checkBoxHandler1H = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.checked)
         e.target.checked ===true ? volatility1HSetter(e.target.checked = false):volatility1HSetter(e.target.checked = true)
+        console.log(`1 HR : ${e.target.checked}`)
     }
 
     const checkBoxHandler4H = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.checked)
         e.target.checked ===true ? volatility4HSetter(e.target.checked = false):volatility4HSetter(e.target.checked = true)
+        console.log(`4 HR : ${e.target.checked}`)
     }
 
 return (

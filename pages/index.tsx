@@ -9,11 +9,7 @@ import Volume from '../components/trading_checklist/Volume'
 import SaveTrade from '../components/trading_checklist/SaveTrade'
 
 import { useState } from 'react'
-
-
-
  const Home = () => {
-
   
   interface Trend {fourhourly: string;oneday: string;}
   interface FibRetracement {retracement: number}
@@ -67,11 +63,47 @@ import { useState } from 'react'
     setVolume({"level":volume})
   }
   
+  const handleSubmit = async (e: React.SyntheticEvent ) =>{ 
+    e.preventDefault()
+    const data = {
+      "trend":
+      {          
+          "fourHourTrend": trend.fourhourly,
+          "oneDayTrend":trend.oneday
+      },
+      "fibRetracement":retracement.retracement,
+      "restSwingPoint":rsp.value,
+      "volatility":{
+          "minfifteen":volatility.minfifteen,
+          "hourone":volatility.hourone,
+          "hourfour": volatility.hourfour
+      },
+      "close":closure.close,
+      "correlation":correlation.value,
+      "volume": volume.level
+
+    } 
+    const JSONdata = JSON.stringify(data)
+
+    // API endpoint where we send form data.
+    const endpoint = '/api/trade'
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSONdata,
+    }
+    const response = await fetch(endpoint, options)
+    const result = await response.json()
+    alert(`Is this your data ${result}`)
+
+  }
 
   return (
   <div>
       <h1 className="ui center aligned header">Trading Checklist</h1>
-    
+      <form className='ui form' onSubmit={handleSubmit} >
       <div className = "ui container grid">
         <Grid columns={3} divided>
         <Grid.Row stretched>
@@ -125,6 +157,7 @@ import { useState } from 'react'
         <SaveTrade/>
       </Grid>
     </div>
+    </form>
   </div>
   )
 }

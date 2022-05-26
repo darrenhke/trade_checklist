@@ -11,6 +11,7 @@ interface IProps {
     const fibValues: number[] = [38.2,50.0,61.8]
 
     const fibButtonHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
         const newValue = parseFloat(e.currentTarget.value)
         console.log(newValue);
         

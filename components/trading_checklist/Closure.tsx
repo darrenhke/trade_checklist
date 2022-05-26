@@ -12,6 +12,7 @@ const Closure = ({close,setClosureHandler} : IProps) => {
     const closureValues: Array<string> = ["Type 1","Type 2","Type 3"]
 
     const closureHandler = (e: React.MouseEvent<HTMLButtonElement>) =>{
+        e.preventDefault()
         console.log(e.currentTarget.value)
         return close.close === e.currentTarget.value ?  setClosureHandler(""): setClosureHandler(e.currentTarget.value)
     }
