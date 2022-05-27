@@ -28,21 +28,21 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
                 "dateExecuted":  Date.now(),
 
             }
-                
                 const trade = await db.collection('checklist').insertOne(tradeObj)
                 return res.status(201).json({trade});
                 // console.log(trade);
                 
             }catch(err){
-                res.status(500).json(err);
+                res.status(501).json(err);
             }
         }
         case 'GET':{
             try{
                 let { db } = await connectToDatabase();
                 const trades = await db.collection("checklist").find().toArray();
-                res.status(200).json({ trades });
-                return;
+                console.log("Info retrieved")
+                return res.status(200).json({ trades });
+
             }catch(err){
                 res.status(500).json(err);
             }  
