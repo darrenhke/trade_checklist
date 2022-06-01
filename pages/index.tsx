@@ -7,6 +7,7 @@ import Correlation from '../components/trading_checklist/Correlation'
 import Rsp from '../components/trading_checklist/Rsp'
 import Volume from '../components/trading_checklist/Volume'
 import SaveTrade from '../components/trading_checklist/SaveTrade'
+import { useRouter } from 'next/router'
 
 import { useState } from 'react'
  const Home = () => {
@@ -65,6 +66,7 @@ import { useState } from 'react'
   
   const handleSubmit = async (e: React.SyntheticEvent ) =>{ 
     e.preventDefault()
+    const router = useRouter()
     const data = {
       "trend":
       {          
@@ -97,8 +99,8 @@ import { useState } from 'react'
     const response = await fetch(endpoint, options)
     const result = await response.json()
     const currentTime = new Date().toLocaleString();
-    alert(`Trade has been submitted at ${currentTime}  `)
-
+    alert(`Trade has been submitted at ${currentTime}`)
+    router.push('/list_trade')
   }
 
   return (

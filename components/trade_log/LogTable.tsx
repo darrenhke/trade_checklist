@@ -6,7 +6,7 @@ import { Header, Table, Rating } from 'semantic-ui-react'
 
 
 const LogTable = () => {
-    const [data,setData] = useState()
+    const [data,setData] = useState([])
 
     useEffect(() =>{
         fetch('http://localhost:3000/api/trade')
@@ -25,37 +25,32 @@ const LogTable = () => {
     }
   
     return(
-    // <Table celled padded>
-    // <Table.Header>
-    //     <Table.Row>
-    //       <Table.HeaderCell>Date</Table.HeaderCell>
-    //       <Table.HeaderCell>Time Executed</Table.HeaderCell>
-    //       <Table.HeaderCell>Pair</Table.HeaderCell>
-    //       <Table.HeaderCell>Status</Table.HeaderCell>
-    //       <Table.HeaderCell>Outcome</Table.HeaderCell>
-    //       <Table.HeaderCell>Confluences</Table.HeaderCell>
-    //       <Table.HeaderCell>Details</Table.HeaderCell>
-    //     </Table.Row>
-    //   </Table.Header>
+    <Table celled padded>
+    <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell>DateTime Executed</Table.HeaderCell>
+          {/* <Table.HeaderCell>Pair</Table.HeaderCell> */}
+          <Table.HeaderCell>Status</Table.HeaderCell>
+          {/* <Table.HeaderCell>Outcome</Table.HeaderCell> */}
+          {/* <Table.HeaderCell>Confluences</Table.HeaderCell> */}
+          {/* <Table.HeaderCell>Details</Table.HeaderCell> */}
+        </Table.Row>
+      </Table.Header>
   
-    //   <Table.Body>
-          
-            //  <p> {data[0].dateExecuted} </p>
-              data?.map((trade) =>  {
-               <Table.Row>
-                    <Table.Cell>
-                        <Header as='h2' textAlign='center'>
-                            {trade.close}
-                        </Header>
-                    </Table.Cell>
-                </Table.Row>
-               
-              })
+      <Table.Body>
+              {data.map((trade) =>  {
+                let date = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(trade.dateExecuted)
+                return(
+                  <Table.Row>
+                  <Table.Cell>{date}</Table.Cell>
+                  <Table.Cell>{trade.status}</Table.Cell>
+              </Table.Row>
+                )
 
-          
-        
-    //   </Table.Body>
-    // </Table>
+               
+              })}
+      </Table.Body>
+    </Table>
     )
     
 }

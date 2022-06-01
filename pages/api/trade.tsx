@@ -26,6 +26,8 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
                 "correlation":req.body.correlation,
                 "volume":req.body.volume,
                 "dateExecuted":  Date.now(),
+                "status": "ONGOING", //Should have only states ONGOING/COMPLETED. "ONGOING" trades should be marked orange and green for "COMPLETED"
+                
 
             }
                 const trade = await db.collection('checklist').insertOne(tradeObj)
