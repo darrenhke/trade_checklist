@@ -50,5 +50,21 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
             }  
         }
 
+        case 'PATCH':{
+            try{
+                let { db } = await connectToDatabase();
+                const trade = await db.collection("checklist").updateOne(
+                    { id: req.body._id},
+                    {$set:{"status": req.body.status}},
+                    // {upsert:true}
+                    )
+                console.log(`Object ${req.body._id} status has been updated to ${req.body.status}`)
+                return res.status(200).json({ trade });
+            }
+            catch(err){
+               return res.status(500).json(err);
+            }
+        }
+
     }
 }   
