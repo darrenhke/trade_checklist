@@ -52,9 +52,10 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
 
         case 'PATCH':{
             try{
+                var ObjectID = require('mongodb').ObjectID;
                 let { db } = await connectToDatabase();
                 const trade = await db.collection("checklist").updateOne(
-                    { id: req.body._id},
+                    { '_id': ObjectID(req.body._id)},
                     {$set:{"status": req.body.status}},
                     // {upsert:true}
                     )
