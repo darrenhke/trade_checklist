@@ -1,4 +1,6 @@
-import {Divider, Grid,GridColumn,Segment} from 'semantic-ui-react'
+//Semantic UI Components
+import {Divider, Grid,GridColumn,Segment, Form} from 'semantic-ui-react'
+//Custom Components
 import Trend from '../components/trading_checklist/Trend'
 import FibRetracement from '../components/trading_checklist/FibRetracement'
 import Volatilty from '../components/trading_checklist/Volatility'
@@ -7,11 +9,12 @@ import Correlation from '../components/trading_checklist/Correlation'
 import Rsp from '../components/trading_checklist/Rsp'
 import Volume from '../components/trading_checklist/Volume'
 import SaveTrade from '../components/trading_checklist/SaveTrade'
+//Next.js
 import { useRouter } from 'next/router'
 
 import { useState } from 'react'
  const Home = () => {
-  
+  const router = useRouter() 
   interface Trend {fourhourly: string;oneday: string;}
   interface FibRetracement {retracement: number}
   interface RSP{value: boolean}
@@ -67,7 +70,9 @@ import { useState } from 'react'
   //To create REST UTIL methods
   const handleSubmit = async (e: React.SyntheticEvent ) =>{ 
     e.preventDefault()
-    const router = useRouter()
+    
+    
+
     const data = {
       "trend":
       {          
@@ -84,7 +89,6 @@ import { useState } from 'react'
       "close":closure.close,
       "correlation":correlation.value,
       "volume": volume.level
-
     } 
     const JSONdata = JSON.stringify(data)
 
@@ -100,7 +104,7 @@ import { useState } from 'react'
     const response = await fetch(endpoint, options)
     const result = await response.json()
     const currentTime = new Date().toLocaleString();
-    alert(`Trade has been submitted at ${currentTime}`)
+    confirm(`Trade has been submitted at ${currentTime}`)
     router.push('/list_trade')
   }
 

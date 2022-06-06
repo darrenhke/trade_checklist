@@ -18,7 +18,7 @@ interface IProps {
         <>
             <h2 className="ui blue header">Correlation</h2>
             <br/><br/>
-            <Checkbox checked = {cor.value} label="Is there a existing corrlation with any index i.e. USD YEN index." onChange={(e)=>checkBoxHandler(e)}/>
+            <Checkbox checked = {cor.value} label="Is there a existing correlation with any index i.e. USD YEN index." onChange={(e)=>checkBoxHandler(e)}/>
         </>
     )
 }

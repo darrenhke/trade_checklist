@@ -32,7 +32,7 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
             }
                 const trade = await db.collection('checklist').insertOne(tradeObj)
                 return res.status(201).json({trade});
-                // console.log(trade);
+                console.log(trade);
                 
             }catch(err){
                 res.status(501).json(err);
@@ -56,9 +56,13 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
                 let { db } = await connectToDatabase();
                 const trade = await db.collection("checklist").updateOne(
                     { '_id': ObjectID(req.body._id)},
-                    {$set:{"status": req.body.status}},
-                    // {upsert:true}
+                    {$set:{
+                        "status": req.body.status,
+                        "dateClosed": Date.now(),
+                        "duration" : {$subtract : [Date.now(),"$dateExecuted"]}
+                    }},
                     )
+                    {upsert:true}
                 console.log(`Object ${req.body._id} status has been updated to ${req.body.status}`)
                 return res.status(200).json({ trade });
             }

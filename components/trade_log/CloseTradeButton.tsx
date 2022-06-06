@@ -1,34 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 interface IProps{
     tradeId: string,
-    tradeStatus: string
-    
+    tradeStatus: string,
+    closeStateHandler: (...args: string[]) => void
 }
 
-const CloseTradeButton = ({tradeId,tradeStatus}: IProps) => {
-
+const CloseTradeButton = ({tradeId,tradeStatus,closeStateHandler}: IProps) => {
+   
     const handleCloseTrade = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        const data = 
-        {
-            "_id": tradeId,
-        }
-        const JSONdata = JSON.stringify(data)
-        const endpoint = '/api/trade'
-        const options = {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSONdata,
-        }
-        const response = await fetch(endpoint, options)
-        const result = await response.json()
-        console.log(result)
-
+        closeStateHandler(tradeId)
    }
-
 
     if( tradeStatus === "ONGOING"){
         return(
