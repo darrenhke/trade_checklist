@@ -43,6 +43,7 @@ const LogTable = () => {
     }
   
     return(
+      <div className = "ui container grid">
     <Table celled padded>
     <Table.Header>
         <Table.Row>
@@ -76,6 +77,7 @@ const LogTable = () => {
               })}
       </Table.Body>
     </Table>
+    </div>
     )
     
 }

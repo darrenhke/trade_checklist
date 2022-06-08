@@ -1,11 +1,16 @@
 import React from "react"
 import LogTable from "../components/trade_log/LogTable"
+import NavigationBar from "../components/navigation_bar/NavigationBar"
 
 const TradeLog =  () => {
     return(
-        <div>
-            <LogTable/>
-        </div>
+        <>
+        <NavigationBar/>
+        <LogTable/>
+        </>
+        
+            
+        
     )
 }
 

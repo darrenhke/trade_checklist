@@ -9,6 +9,7 @@ import Correlation from '../components/trading_checklist/Correlation'
 import Rsp from '../components/trading_checklist/Rsp'
 import Volume from '../components/trading_checklist/Volume'
 import SaveTrade from '../components/trading_checklist/SaveTrade'
+import NavigationBar from '../components/navigation_bar/NavigationBar'
 //Next.js
 import { useRouter } from 'next/router'
 
@@ -109,7 +110,9 @@ import { useState } from 'react'
   }
 
   return (
+    
   <div>
+      <NavigationBar/>
       <h1 className="ui center aligned header">Trading Checklist</h1>
       <form className='ui form' onSubmit={handleSubmit} >
       <div className = "ui container grid">
