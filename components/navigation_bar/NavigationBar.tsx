@@ -6,9 +6,10 @@ const NavigationBar = () => {
     return(
      <div className="ui menu">
             <div className="header item">
-                <Link href="/"><a>Trading Checklist</a></Link>
+                <Link href="/"><a><h3>Trading Checklist</h3></a></Link>
             </div>
-            <Link href="/list_trade"><a className="right item">Trade Logs</a></Link>
+            <Link href="/"><a className="right item "><button className="ui primary button">New Trade</button></a></Link>
+            <Link href="/list_trade"><a className="item">Trade Logs</a></Link>
             <a className="item">Dashboard</a>
             <a className="item">Trading Health</a>
             <a className="item">Settings</a>
