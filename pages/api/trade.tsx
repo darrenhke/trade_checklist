@@ -41,7 +41,7 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
         case 'GET':{
             try{
                 let { db } = await connectToDatabase();
-                const trades = await db.collection("checklist").find().toArray();
+                const trades = await db.collection("checklist").find().sort({dateClosed: 1}).toArray();
                 console.log("Info retrieved")
                 return res.status(200).json({ trades });
 

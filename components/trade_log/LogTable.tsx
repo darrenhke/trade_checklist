@@ -15,11 +15,12 @@ const LogTable = () => {
         })
     },[counter])
     
-    const handleCloseClickState = async (tradeId) => {
+    //Close Button Handler
+    const handleCloseClickState = async (tradeId,typeClosed) => {
       const data = 
       {
           "_id": tradeId,
-          "status": "CLOSED"
+          "status": typeClosed
       }
       const JSONdata = JSON.stringify(data)
       const endpoint = '/api/trade'
@@ -69,7 +70,7 @@ const LogTable = () => {
                   <Table.Cell >{duration}</Table.Cell>
                   <Table.Cell >{trade.status === 'ONGOING'?'':dateCompleted}</Table.Cell>
                   <Table.Cell >{trade.status}</Table.Cell>
-                  <Table.Cell ><CloseTradeButton tradeId = {trade._id} tradeStatus={trade.status} closeStateHandler = {handleCloseClickState}/></Table.Cell>
+                  <Table.Cell ><CloseTradeButton tradeId = {trade._id} tradeStatus={trade.status} closeStateHandler = {handleCloseClickState} /></Table.Cell>
               </Table.Row>
                 )
 

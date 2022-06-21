@@ -14,6 +14,7 @@ import NavigationBar from '../components/navigation_bar/NavigationBar'
 import { useRouter } from 'next/router'
 
 import { useState } from 'react'
+import { unwatchFile } from 'fs'
  const Home = () => {
   const router = useRouter() 
   interface Trend {fourhourly: string;oneday: string;}
@@ -71,9 +72,25 @@ import { useState } from 'react'
   //To create REST UTIL methods
   const handleSubmit = async (e: React.SyntheticEvent ) =>{ 
     e.preventDefault()
-    
+    //Create in Util file
+    let warningMsg = []
+    if(!trend.fourhourly || !trend.oneday){
+      warningMsg.push("Trend values are empty.")
+    }
+    if(!retracement.retracement){
+      warningMsg.push("Fib Retracement values are empty.")
+    }
+    if(!closure.close){
+      warningMsg.push("Price Closure field is empty please fill it up.")
+    }
     
 
+    if(warningMsg.length){
+      console.log(warningMsg)
+      alert("Values are missing from certain fields")
+    }
+    else{
+      console.log(warningMsg)
     const data = {
       "trend":
       {          
@@ -107,6 +124,7 @@ import { useState } from 'react'
     const currentTime = new Date().toLocaleString();
     confirm(`Trade has been submitted at ${currentTime}`)
     router.push('/list_trade')
+    }
   }
 
   return (
