@@ -20,7 +20,7 @@ const CloseTradeButton = ({tradeId,tradeStatus,closeStateHandler}: IProps) => {
         return(
             <>
             {/* <button className="ui inverted primary button" onClick = {handleCloseTrade}>Close Won</button> */}
-             <Button.Group className="closeTypeButtons" color='blue'>
+             <Button.Group className="closeTypeButtons" color='blue' onClick= {handleCloseTrade}>
                  <Button value={"Closed Won"} onClick= {handleCloseTrade}>Closed Won</Button>
                  <Button.Or />
                  <Button value={"Closed Lost"} onClick= {handleCloseTrade}>Closed Lost</Button>

@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { Header, Table, Rating } from 'semantic-ui-react'
+import React, { useEffect, useState,useContext, createContext } from "react";
+import Link from 'next/link'
+//Components
+import {Table } from 'semantic-ui-react'
 import CloseTradeButton from "./CloseTradeButton";
+//Lib
 import moment from 'moment'
 
 const LogTable = () => {
     const [data,setData] = useState([])
     const [counter,setCounter] = useState(0)
-
+    const TradeContext = createContext('')
     useEffect(() => {
-        fetch('http://localhost:3000/api/trade')
+        fetch('http://localhost:3000/api/trades')
         .then( res => res.json())
         .then(data => {
             setData(data.trades)
         })
     },[counter])
     
-    //Close Button Handler
+    //Close Button Handler for single trade
     const handleCloseClickState = async (tradeId,typeClosed) => {
       const data = 
       {
@@ -45,23 +48,23 @@ const LogTable = () => {
   
     return(
       <div className = "ui container grid">
-    <Table celled padded>
-    <Table.Header>
+      <table className="ui celled padded table">
+      <Table.Header>
         <Table.Row>
           <Table.HeaderCell>Open</Table.HeaderCell>
           <Table.HeaderCell>Trade Duration</Table.HeaderCell>
           <Table.HeaderCell>Closed</Table.HeaderCell>
           <Table.HeaderCell>Status</Table.HeaderCell>
-          {/* <Table.HeaderCell>Outcome</Table.HeaderCell> */}
           {/* <Table.HeaderCell>Confluences</Table.HeaderCell> */}
           <Table.HeaderCell></Table.HeaderCell>
+          <Table.HeaderCell>View</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
   
       <Table.Body>
               {data.map((trade) =>  {
-                let dateExecuted = moment(trade.dateExecuted).format('DD/MM/YYY, HH:mm:ss')
-                let dateCompleted = moment(trade.dateClosed).format('DD/MM/YYY, HH:mm:ss')
+                let dateExecuted = moment(trade.dateExecuted).format('DD/MM/YYYY, HH:mm:ss')
+                let dateCompleted = moment(trade.dateClosed).format('DD/MM/YYYY, HH:mm:ss')
                 let duration = trade.status === "ONGOING"? moment(trade.dateExecuted).fromNow(): moment.utc(moment(dateCompleted,"DD/MM/YYYY HH:mm:ss").diff(moment(dateExecuted,"DD/MM/YYYY HH:mm:ss"))).format("HH \\hr mm \\min ss \\s\\ec")
                 
                 return(
@@ -71,13 +74,16 @@ const LogTable = () => {
                   <Table.Cell >{trade.status === 'ONGOING'?'':dateCompleted}</Table.Cell>
                   <Table.Cell >{trade.status}</Table.Cell>
                   <Table.Cell ><CloseTradeButton tradeId = {trade._id} tradeStatus={trade.status} closeStateHandler = {handleCloseClickState} /></Table.Cell>
+                  <Table.Cell > 
+                   <Link href = {{ pathname :'/list_trade/[id]', query: {id: trade._id}}}><a> View </a></Link>
+                  </Table.Cell>
               </Table.Row>
                 )
 
                
               })}
       </Table.Body>
-    </Table>
+    </table>
     </div>
     )
     
