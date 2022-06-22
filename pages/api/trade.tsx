@@ -1,4 +1,3 @@
-import { ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from '../../middleware/database';
 
@@ -43,11 +42,11 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
                 var ObjectID = require('mongodb').ObjectID;
                 let { db } = await connectToDatabase();
                 const trade = await db.collection("checklist").findOne({_id: ObjectID(req.query.id)});
-                console.log(`Trade with ID of ${req.body._id}`)
+                console.log(`Trade with ID of ${req.query.id}`)
                 return res.status(200).json({ trade });
 
             }catch(err){
-                res.status(500).json(err);
+                return res.status(500).json(err);
             }  
         }
 

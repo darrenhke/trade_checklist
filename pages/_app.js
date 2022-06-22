@@ -1,10 +1,10 @@
 import '../styles/globals.css'
 import 'semantic-ui-css/semantic.min.css';
 
-function MyApp({ Component, pageProps }) {
-  const [session, setSession] = useState()
 
-  return (<AppContext.Provider value={{ session, setSession }}><Component {...pageProps} /></AppContext.Provider>)
+function MyApp({ Component, pageProps }) {
+
+  return (<Component {...pageProps} />)
 }
 
 export default MyApp
